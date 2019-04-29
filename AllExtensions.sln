@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllExtensions.Android", "Al
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllExtensions.iOS", "AllExtensions\AllExtensions.iOS\AllExtensions.iOS.csproj", "{ADA4F93B-B588-4B86-AF7D-20C5EE4FC226}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AllExtensions", "AllExtensions\AllExtensions\AllExtensions.csproj", "{3214D78A-B1C5-47D5-A43D-397419BBBF71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AllExtensions", "AllExtensions\AllExtensions\AllExtensions.csproj", "{3214D78A-B1C5-47D5-A43D-397419BBBF71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

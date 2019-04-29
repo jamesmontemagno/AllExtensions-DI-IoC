@@ -11,7 +11,6 @@ namespace AllExtensions
     {
         public MainViewModel(ILogger<MainViewModel> logger, IHttpClientFactory httpClientFactory)
         {
-
             var httpClient = httpClientFactory.CreateClient();
             logger.LogCritical("Always be logging!");
             Hello = "Hello from IoC";
