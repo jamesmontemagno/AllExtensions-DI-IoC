@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using AllExtensions.Helpers;
 using Foundation;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using UIKit;
 
 namespace AllExtensions.iOS
@@ -23,9 +25,25 @@ namespace AllExtensions.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(Startup.Init());
+            LoadApplication(Startup.Init(ConfigureServices));
 
             return base.FinishedLaunching(app, options);
+        }
+
+        void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
+        {
+            services.AddSingleton<INativeCalls, NativeCalls>();
+        }
+    }
+
+    public class NativeCalls : INativeCalls
+    {
+        public void OpenToast(string text)
+        {
+            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            var okAlert = UIAlertController.Create(string.Empty, text, UIAlertControllerStyle.Alert);
+            okAlert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+            vc.PresentViewController(okAlert, true, null);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace AllExtensions
 {
     public static class Startup
     {
-        public static App Init()
+        public static App Init(Action<HostBuilderContext, IServiceCollection> nativeConfigureServices)
         {
             var systemDir = FileSystem.CacheDirectory;
             Utils.ExtractSaveResource("AllExtensions.appsettings.json", systemDir);
@@ -24,7 +24,11 @@ namespace AllExtensions
                                 c.AddCommandLine(new string[] { $"ContentRoot={FileSystem.AppDataDirectory}" });
                                 c.AddJsonFile(fullConfig);
                             })
-                            .ConfigureServices((c, x) => ConfigureServices(c, x))
+                            .ConfigureServices((c, x) =>
+                            {
+                                nativeConfigureServices(c, x);
+                                ConfigureServices(c, x);
+                            })
                             .ConfigureLogging(l => l.AddConsole(o =>
                             {
                                 o.DisableColors = true;

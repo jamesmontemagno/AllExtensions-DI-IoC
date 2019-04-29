@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using AllExtensions.Helpers;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AllExtensions.Droid
 {
@@ -21,7 +24,7 @@ namespace AllExtensions.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(Startup.Init());
+            LoadApplication(Startup.Init(ConfigureServices));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -29,6 +32,19 @@ namespace AllExtensions.Droid
 
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
+        {
+            services.AddSingleton<INativeCalls, NativeCalls>();
+        }
+    }
+
+    public class NativeCalls : INativeCalls
+    {
+        public void OpenToast(string text)
+        {
+            Toast.MakeText(Application.Context, text, ToastLength.Long).Show();
         }
     }
 }

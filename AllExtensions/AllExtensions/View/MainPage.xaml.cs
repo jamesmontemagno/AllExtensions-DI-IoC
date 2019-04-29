@@ -1,6 +1,8 @@
-﻿using System;
+﻿using AllExtensions.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,12 @@ namespace AllExtensions
         {
             InitializeComponent();
             BindingContext = viewModel;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.ServiceProvider.GetService<INativeCalls>().OpenToast("Hello fro DI");
         }
     }
 }

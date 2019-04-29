@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Http;
+using Microsoft.Extensions.Http;using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +13,8 @@ namespace AllExtensions
         {
             Hello = "Hello from IoC";
         }
+
+        
 
         public string Hello { get; set; }
     }
